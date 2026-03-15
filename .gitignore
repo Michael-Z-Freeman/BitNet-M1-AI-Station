@@ -1,0 +1,23 @@
+# Models
+models/
+
+# Virtual Environments
+.venv/
+.venv-webui/
+
+# Cloned Repositories
+bitnet-repo/
+
+# Logs
+*.log
+
+# macOS System Files
+.DS_Store
+
+# WebUI data/configs
+data/
+.webui_secret_key
+.env
+
+# LaunchAgent Plist (User specific path inside)
+com.ai.station.startup.plist

@@ -1,0 +1,30 @@
+#!/bin/bash
+# Script to start llama-server with BitNet and Standard models
+# Usage: ./start_server.sh [8b|2b|std-8b]
+
+MODEL_TYPE=${1:-8b}
+
+if [ "$MODEL_TYPE" == "8b" ]; then
+    MODEL_PATH="models/Llama3-8B-1.58/Llama3-8B-1.58-100B-tokens-TQ2_0.gguf"
+    EXTRA_FLAGS="-ngl 0"
+    echo "Starting 8B BitNet model on CPU..."
+elif [ "$MODEL_TYPE" == "2b" ]; then
+    MODEL_PATH="models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf"
+    EXTRA_FLAGS=""
+    echo "Starting 2B BitNet model with Metal..."
+elif [ "$MODEL_TYPE" == "std-8b" ]; then
+    MODEL_PATH="models/Llama-3.1-8B-Instruct/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
+    # Offload 12/33 layers to GPU to stay within 8GB RAM limits
+    # Context limited to 2048 to prevent OOM
+    EXTRA_FLAGS="-ngl 12 -c 2048"
+    echo "Starting Standard Llama 3.1 8B Instruct (12 layers on GPU, 2k Context)..."
+else
+    echo "Unknown model type: $MODEL_TYPE. Use '8b', '2b', or 'std-8b'."
+    exit 1
+fi
+
+./bitnet-repo/build/bin/llama-server \
+    -m "$MODEL_PATH" \
+    --host 0.0.0.0 \
+    --port 8000 \
+    $EXTRA_FLAGS
