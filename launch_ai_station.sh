@@ -8,11 +8,6 @@ cd /Users/michaelzfreeman/Installations/BitNet
 # Clean up any existing background logs if they exist
 touch webui.log
 
-# 1. Start the Model Server (Standard 8B)
-# We don't background here, we let the script wait or manage it
-# But we need both to run, so we'll use a specific approach for launchd
-# Use absolute paths for everything to be safe
-
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
 
 # Kill any existing instances to avoid port conflicts
@@ -25,8 +20,8 @@ rm -f /Users/michaelzfreeman/Installations/BitNet/server.log
 rm -f /Users/michaelzfreeman/Installations/BitNet/webui.log
 rm -f /Users/michaelzfreeman/Installations/BitNet/searxng.log
 
-# 1. Start the Model Server (Intelligent-Internet 4B Search)
-# Uses ii-search by default as configured in start_server.sh
+# 1. Start the Model Server (Qwen2.5 3B Instruct)
+# Fast, stable on 8GB RAM, supports search, NO "thinking" overhead
 ./start_server.sh > /Users/michaelzfreeman/Installations/BitNet/server.log 2>&1 &
 
 # 2. Start SearXNG

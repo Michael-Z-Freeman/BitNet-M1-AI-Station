@@ -9,7 +9,7 @@ You can start all components individually or use the automation script.
 
 **Option A: Individual Start (3 Terminals)**
 ```bash
-# Terminal 1: Model Server (Intelligent-Internet 4B Search - DEFAULT)
+# Terminal 1: Model Server (Qwen2.5 3B Instruct - DEFAULT)
 ./start_server.sh
 
 # Terminal 2: Local Search Engine (SearXNG)
@@ -64,11 +64,17 @@ The system is configured to start automatically on login using macOS `launchd`.
 
 ## ⚙️ Optimization for 8GB RAM
 
-### 1. II-Search 4B Model (Default)
+### 1. Qwen2.5 3B Instruct (Default)
+- **Model:** `Qwen2.5-3B-Instruct` (Q4_K_M GGUF)
+- **Memory Footprint:** ~2.1GB.
+- **Context Window:** **24576 tokens** (Stable and spacious for search-augmented chats).
+- **GPU Offloading:** **100% layers** offloaded to Metal for high-speed inference.
+
+### 2. II-Search 4B Model (Option: `ii-search`)
 - **Model:** `Intelligent-Internet.II-Search-4B` (Q4_K_M GGUF)
 - **Memory Footprint:** ~2.7GB.
-- **Context Window:** **16384 tokens** (Optimal for 8GB RAM systems, prevents freezing).
-- **GPU Offloading:** **100% layers** offloaded to Metal for high-speed inference.
+- **Context Window:** **24576 tokens** (Reasoning model, slow but deep).
+- **GPU Offloading:** **100% layers** offloaded to Metal.
 
 ### 2. Llama 3.1 8B (Option: `std-8b`)
 - **Memory Footprint:** ~4.9GB.
@@ -79,7 +85,8 @@ The system is configured to start automatically on login using macOS `launchd`.
 
 ## 🛠 Project Structure
 
-- `models/ii-search/`: The 4B AI search model.
+- `models/qwen2.5-3b/`: The default 3B AI search model.
+- `models/ii-search/`: The 4B AI reasoning search model.
 - `searxng_repo/`: SearXNG source code.
 - `searxng/settings.yml`: Local configuration for the search engine.
 - `.venv-searxng/`: Python 3.12 environment for SearXNG.
