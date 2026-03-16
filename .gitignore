@@ -4,15 +4,18 @@ models/
 # Virtual Environments
 .venv/
 .venv-webui/
+.venv-searxng/
 
 # Cloned Repositories
 bitnet-repo/
+searxng_repo/
 
 # Logs
 *.log
 
 # macOS System Files
 .DS_Store
+*.pdf
 
 # WebUI data/configs
 data/

@@ -18,12 +18,22 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
 # Kill any existing instances to avoid port conflicts
 pkill -f llama-server
 pkill -f open-webui
+pkill -f webapp.py
 
-# Start server in background
-./start_server.sh std-8b > /Users/michaelzfreeman/Installations/BitNet/server.log 2>&1 &
+# Clean up logs
+rm -f /Users/michaelzfreeman/Installations/BitNet/server.log
+rm -f /Users/michaelzfreeman/Installations/BitNet/webui.log
+rm -f /Users/michaelzfreeman/Installations/BitNet/searxng.log
 
-# Wait for server
+# 1. Start the Model Server (Intelligent-Internet 4B Search)
+# Uses ii-search by default as configured in start_server.sh
+./start_server.sh > /Users/michaelzfreeman/Installations/BitNet/server.log 2>&1 &
+
+# 2. Start SearXNG
+./start_searxng.sh > /Users/michaelzfreeman/Installations/BitNet/searxng.log 2>&1 &
+
+# Wait for services to initialize
 sleep 15
 
-# Start WebUI in the FOREGROUND (so launchd keeps the script alive)
+# 3. Start WebUI in the FOREGROUND (so launchd keeps the script alive)
 ./start_webui.sh > /Users/michaelzfreeman/Installations/BitNet/webui.log 2>&1
