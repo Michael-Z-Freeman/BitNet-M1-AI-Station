@@ -67,7 +67,7 @@ The system is configured to start automatically on login using macOS `launchd`.
 ### 1. II-Search 4B Model (Default)
 - **Model:** `Intelligent-Internet.II-Search-4B` (Q4_K_M GGUF)
 - **Memory Footprint:** ~2.7GB.
-- **Context Window:** **8192 tokens** (Optimized for reading multiple search results).
+- **Context Window:** **16384 tokens** (Optimal for 8GB RAM systems, prevents freezing).
 - **GPU Offloading:** **100% layers** offloaded to Metal for high-speed inference.
 
 ### 2. Llama 3.1 8B (Option: `std-8b`)

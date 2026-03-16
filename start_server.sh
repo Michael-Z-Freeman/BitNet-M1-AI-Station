@@ -7,10 +7,10 @@ MODEL_TYPE=${1:-ii-search}
 if [ "$MODEL_TYPE" == "ii-search" ]; then
     MODEL_PATH="models/ii-search/Intelligent-Internet.II-Search-4B.Q4_K_M.gguf"
     # Offload all layers to GPU (4B model fits easily)
-    # Increase context window to 8k for search results
-    EXTRA_FLAGS="-ngl 99 -c 8192"
+    # 16k context is the "sweet spot" for 8GB RAM systems
+    EXTRA_FLAGS="-ngl 99 -c 16384"
     LLAMA_SERVER="/opt/homebrew/bin/llama-server"
-    echo "Starting Intelligent-Internet 4B Search model (Full Metal, 8k Context)..."
+    echo "Starting Intelligent-Internet 4B Search model (Full Metal, 16k Context)..."
 elif [ "$MODEL_TYPE" == "8b" ]; then
     MODEL_PATH="models/Llama3-8B-1.58/Llama3-8B-1.58-100B-tokens-TQ2_0.gguf"
     EXTRA_FLAGS="-ngl 0"
