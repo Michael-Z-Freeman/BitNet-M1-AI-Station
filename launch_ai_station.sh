@@ -23,11 +23,8 @@ rm -f /home/michaelzfreeman/Installations/BitNet-M1-AI-Station/searxng.log
 # 1. Start the Model Server (Now using Ollama, which is already running as a system service)
 # No need to start llama-server manually anymore.
 
-# 2. Start SearXNG
-./start_searxng.sh > /home/michaelzfreeman/Installations/BitNet-M1-AI-Station/searxng.log 2>&1 &
+# 2. Wait for services to initialize
+sleep 5
 
-# Wait for services to initialize
-sleep 15
-
-# 3. Start WebUI in the FOREGROUND (so launchd keeps the script alive)
+# 3. Start WebUI in the FOREGROUND
 ./start_webui.sh > /home/michaelzfreeman/Installations/BitNet-M1-AI-Station/webui.log 2>&1
