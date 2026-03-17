@@ -23,3 +23,5 @@ data/
 .env
 
 
+llama.cpp/
+amdgpu-install_*.deb

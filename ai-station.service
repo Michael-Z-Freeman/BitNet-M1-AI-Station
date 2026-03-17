@@ -1,0 +1,13 @@
+[Unit]
+Description=AI Search Station Master Script
+After=network.target
+
+[Service]
+Type=simple
+User=michaelzfreeman
+WorkingDirectory=/home/michaelzfreeman/Installations/BitNet-M1-AI-Station
+ExecStart=/bin/bash /home/michaelzfreeman/Installations/BitNet-M1-AI-Station/launch_ai_station.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

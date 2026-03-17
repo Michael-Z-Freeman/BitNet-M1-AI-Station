@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script to start Open WebUI
-export OPENAI_API_BASE_URL="http://localhost:8000/v1"
+export OPENAI_API_BASE_URL="http://localhost:11434/v1"
 export OPENAI_API_KEY="unused"
 export HOST="0.0.0.0"
 export PORT="8080"
@@ -9,7 +9,7 @@ export PORT="8080"
 export ENABLE_WEB_SEARCH=True
 export WEB_SEARCH_ENGINE="searxng"
 export SEARXNG_QUERY_URL="http://localhost:8888/search?q=<query>"
-export WEB_SEARCH_RESULT_COUNT=4
+export WEB_SEARCH_RESULT_COUNT=10
 export WEB_SEARCH_CONCURRENT_REQUESTS=10
 
 # Note: For best results, go to 'Workspace > Models > Edit Qwen2.5 3B' 
