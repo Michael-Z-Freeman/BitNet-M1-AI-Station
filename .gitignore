@@ -22,5 +22,4 @@ data/
 .webui_secret_key
 .env
 
-# LaunchAgent Plist (User specific path inside)
-com.ai.station.startup.plist
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ai.station.startup</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/michaelzfreeman/Installations/BitNet/launch_ai_station.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>WorkingDirectory</key>
+    <string>/Users/michaelzfreeman/Installations/BitNet</string>
+    <key>StandardOutPath</key>
+    <string>/Users/michaelzfreeman/Installations/BitNet/launchd_stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/michaelzfreeman/Installations/BitNet/launchd_stderr.log</string>
+</dict>
+</plist>
