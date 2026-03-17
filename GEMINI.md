@@ -1,8 +1,70 @@
-# AI Search Station (8GB M1 Mac)
+# AI Search Station
 
-This project provides a high-performance, private AI search station (Perplexity-style) and inference server running on Apple Silicon. It combines specialized search models, a local search engine (SearXNG), and Open WebUI, all optimized for an 8GB RAM footprint.
+This project provides a high-performance, private AI search station (Perplexity-style) and inference server. Originally optimized for an 8GB M1 Mac, it is now being migrated to a 16GB Linux machine with an AMD GPU (ROCm).
 
-## 🚀 Quick Start
+## 🐧 Linux Migration & Setup (AMD GPU / ROCm)
+
+When moving this project to a Linux machine with an AMD GPU, follow these steps to ensure the new Gemini CLI agent understands the architecture.
+
+### 1. System Dependencies (Apt)
+The new machine needs core build tools and Python development headers for SearXNG and llama.cpp.
+```bash
+sudo apt update
+sudo apt install -y build-essential cmake git python3-pip python3-dev libxml2-dev libxslt-dev zlib1g-dev
+```
+
+### 2. Install llama.cpp with ROCm Support
+Unlike the Mac version which uses Homebrew, the Linux version must be compiled from source to enable the AMD GPU (ROCm/HIP).
+```bash
+git clone https://github.com/ggml-org/llama.cpp.git
+cd llama.cpp
+mkdir build && cd build
+# Replace /opt/rocm with your actual ROCm path if different
+CC=/opt/rocm/bin/hipcc CXX=/opt/rocm/bin/hipcc cmake .. -DGGML_HIPBLAS=ON
+cmake --build . --config Release --parallel 8
+```
+*The resulting binary `llama-server` should be used in `start_server.sh`.*
+
+### 3. Recreate Python Environments
+Use `uv` to recreate the isolated environments for SearXNG and Open WebUI.
+```bash
+# SearXNG
+uv venv .venv-searxng --python 3.12
+source .venv-searxng/bin/activate
+uv pip install -r searxng_repo/requirements.txt
+
+# Open WebUI
+uv venv .venv-webui --python 3.12
+source .venv-webui/bin/activate
+uv pip install open-webui
+```
+
+### 4. Linux Automation (Systemd)
+Replace the macOS `.plist` with a standard `systemd` service file located at `/etc/systemd/system/ai-station.service`.
+```ini
+[Unit]
+Description=AI Search Station Master Script
+After=network.target
+
+[Service]
+Type=simple
+User=[YOUR-USERNAME]
+WorkingDirectory=/path/to/BitNet
+ExecStart=/bin/bash /path/to/BitNet/launch_ai_station.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 5. Hardware Optimization (16GB RAM)
+On the 16GB Linux machine, you can increase the context window and search depth significantly:
+- **Qwen 3B:** Increase context to **64k** (`-c 65536`).
+- **Search Results:** Increase `WEB_SEARCH_RESULT_COUNT` to **10** in `start_webui.sh`.
+
+---
+
+## 🚀 Quick Start (Original macOS)
 
 ### 1. Start the System
 You can start all components individually or use the automation script.
