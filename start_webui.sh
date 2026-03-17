@@ -12,11 +12,17 @@ export SERPER_API_KEY="30a4111b2be4df9eaf745d1bea26cfb66e86d559"
 export WEB_SEARCH_RESULT_COUNT=10
 export WEB_SEARCH_CONCURRENT_REQUESTS=10
 
+# --- RAG / Context Settings ---
+export RAG_TOP_K=10
+export RAG_RELEVANCE_THRESHOLD=0.0
+export ENABLE_RAG_HYBRID_SEARCH=True
+
 # Note: For best results, go to 'Workspace > Models > Edit Qwen2.5 3B' 
 # and set the System Prompt to: 
-# "You are a helpful AI assistant. Use ONLY the provided search results to answer questions. 
-# If the information is not in the results, state that you cannot find it. 
-# Do not use internal knowledge for current events or dates."
+# "You are a comprehensive AI search assistant. Use the provided search results to give a detailed, 
+# structured, and well-reasoned answer. Cite your sources using the [Source Name] format. 
+# Synthesize information from multiple results to provide a complete overview. 
+# If results are insufficient, state what is missing."
 
 source .venv-webui/bin/activate
 open-webui serve
