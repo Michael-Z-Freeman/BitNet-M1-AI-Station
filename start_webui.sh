@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script to start Open WebUI
-export OPENAI_API_BASE_URL="http://localhost:11434/v1"
+export OPENAI_API_BASE_URL="http://192.168.1.196:11434/v1"
 export OPENAI_API_KEY="unused"
 export HOST="0.0.0.0"
 export PORT="8080"
